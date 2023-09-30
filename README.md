@@ -34,11 +34,11 @@ Detail lebih lanjut tentang API dapat dilihat di [sini](link_ke_dokumentasi_API)
 
 1. Clone repositori ini
    ```
-   git clone <URL_REPOSITORI>
+   git clone https://github.com/herbras/Qlink-Pemendek-url
    ```
 2. Pindah ke direktori proyek
    ```
-   cd <NAMA_DIREKTORI_PROYEK>
+   cd Qlink-Pemendek-url
    ```
 3. Jalankan pnpm install
    ```
@@ -56,6 +56,6 @@ Semua perintah dijalankan dari root proyek, dari terminal:
 | `pnpm run build` | Build your production site to `./dist/` |
 | `pnpm run preview` | Preview your build locally, before deploying |
 
-## Tombol Fork dan Deploy ke Vercel
+## Deploy ke Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=URL_REPOSITORI)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/herbras/Qlink-Pemendek-url)
