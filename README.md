@@ -4,6 +4,11 @@
 
 Simplify your link with QLink Qlm one
 
+## Deploy ke Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/herbras/Qlink-Pemendek-url)
+
+
 ## Tech Stack
 
 - Mysql PlanetScale
@@ -45,6 +50,7 @@ Detail lebih lanjut tentang API dapat dilihat di [sini](link_ke_dokumentasi_API)
    pnpm install
    ```
 
+
 ## 🧞 Commands
 
 Semua perintah dijalankan dari root proyek, dari terminal:
@@ -56,6 +62,3 @@ Semua perintah dijalankan dari root proyek, dari terminal:
 | `pnpm run build` | Build your production site to `./dist/` |
 | `pnpm run preview` | Preview your build locally, before deploying |
 
-## Deploy ke Vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/herbras/Qlink-Pemendek-url)
