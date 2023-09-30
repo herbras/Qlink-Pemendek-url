@@ -1,0 +1,171 @@
+---
+import BasicJS from "@components/BasicJS.astro";
+import Headers from "@components/Header.astro";
+const { lang, title } = Astro.props;
+import { config } from "../config";
+---
+
+<!DOCTYPE html>
+<html lang={lang} class="motion-safe:scroll-smooth 2xl:text-[20px]">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+<!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qlink.sarbeh.com/">
+  <meta property="og:title" content="Qlink - Sederhanakan Link Anda">
+  <meta property="og:description" content="Qlink menawarkan solusi pendekatan link yang simpel dan efektif. Dengan mudah, Anda dapat merubah URL panjang menjadi lebih pendek dan mudah diingat.">
+  
+<meta name="author" content="Qlink">
+  <meta name="description" content="Qlink menawarkan solusi pendekatan link yang simpel dan efektif. Dengan mudah, Anda dapat merubah URL panjang menjadi lebih pendek dan mudah diingat.">
+  <meta name="keywords" content="short url, qlm, Qlink, link shortener, url shortener">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://qlink.sarbeh.com/">
+  <meta property="twitter:title" content="Qlink - Sederhanakan Link Anda">
+  <meta property="twitter:description" content="Qlink menawarkan solusi pendekatan link yang simpel dan efektif. Dengan mudah, Anda dapat merubah URL panjang menjadi lebih pendek dan mudah diingat.">
+  <link rel="icon" type="image" href={`${config.baseUrl}favicon.svg`}>
+		<title>{title}</title>
+	</head>
+
+	<body
+		class="antialiased text-gray-900 dark:text-slate-300 tracking-wide bg-white dark:bg-[#050505]"
+	>
+		<Headers />
+
+		<slot />
+		<BasicJS />
+		<style is:global>
+			:root {
+				--star-color-light: 0, 0, 0;
+				--background-color-light: 255, 255, 255;
+				--star-color-dark: 255, 255, 255;
+				--background-color-dark: 0, 0, 0;
+			}
+
+			img {
+				content-visibility: auto;
+			}
+			a {
+				text-decoration: none;
+			}
+			#defaultCanvas0 {
+				position: fixed;
+
+				top: 0;
+				left: 0;
+				z-index: -1;
+			}
+		</style>
+		<script async is:inline src="/js/p5.min.js"></script>
+
+		<script is:inline>
+			let stars = [];
+
+			function setup() {
+				createCanvas(windowWidth, windowHeight);
+				for (let i = 0; i < 800; i++) {
+					stars[i] = new Star();
+				}
+				function draw() {
+					fill(0, 10);
+					rect(0, 0, width, height);
+					translate(width / 2, height / 2);
+					for (let i = 0; i < stars.length; i++) {
+						stars[i].update();
+						stars[i].show();
+					}
+				}
+				// Get current theme and set background color
+				let currentTheme =
+					document.documentElement.getAttribute("data-theme");
+				let backgroundColorValue = getComputedStyle(
+					document.documentElement
+				)
+					.getPropertyValue(`--background-color-${currentTheme}`)
+					.trim();
+				let backgroundColorComponents = backgroundColorValue
+					.split(",")
+					.map(Number);
+				let backgroundColor = color(...backgroundColorComponents);
+
+				background(backgroundColor);
+			}
+
+			function draw() {
+				// Get current theme and set background color
+				let currentTheme =
+					document.documentElement.getAttribute("data-theme");
+				let backgroundColorValue = getComputedStyle(
+					document.documentElement
+				)
+					.getPropertyValue(`--background-color-${currentTheme}`)
+					.trim();
+				let backgroundColorComponents = backgroundColorValue
+					.split(",")
+					.map(Number);
+				let backgroundColor = color(...backgroundColorComponents);
+
+				background(backgroundColor);
+
+				translate(width / 2, height / 2);
+				for (let i = 0; i < stars.length; i++) {
+					stars[i].update();
+					stars[i].show();
+				}
+			}
+
+			function Star() {
+				this.x = random(-width, width);
+				this.y = random(-height, height);
+				this.z = random(width);
+				this.pz = this.z;
+				this.speed = random(0.5, 5);
+
+				this.update = function () {
+					this.z = this.z - this.speed;
+					if (this.z < 1) {
+						this.z = width;
+						this.x = random(-width, width);
+						this.y = random(-height, height);
+						this.pz = this.z;
+					}
+				};
+
+				this.show = function () {
+					let sx = map(this.x / this.z, 0, 1, 0, width);
+					let sy = map(this.y / this.z, 0, 1, 0, height);
+					let r = map(this.z, 0, width, 16, 0);
+
+					// Get current theme and set star color
+					let currentTheme =
+						document.documentElement.getAttribute("data-theme");
+					let starColorValue = getComputedStyle(
+						document.documentElement
+					)
+						.getPropertyValue(`--star-color-${currentTheme}`)
+						.trim();
+					let starColorComponents = starColorValue
+						.split(",")
+						.map(Number);
+					let starColor = color(
+						...starColorComponents,
+						map(this.z, 0, width, 255, 0)
+					);
+
+					fill(starColor);
+					noStroke();
+
+					ellipse(sx, sy, r, r);
+				};
+			}
+			document.documentElement.setAttribute("data-theme", "dark");
+		</script>
+		<script
+			src="//instant.page/5.1.1"
+			type="module"
+			integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"
+		></script>
+	</body>
+</html>

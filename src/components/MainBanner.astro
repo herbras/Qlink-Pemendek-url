@@ -1,0 +1,17 @@
+---
+import Shorteaner from "./App/Pemendek.svelte";
+import History from "./App/History.svelte";
+
+---
+
+<section class="max-w-6xl mx-auto flex items-center justify-center">
+	<div class="text-center mt-5">
+	
+		<h1 id="main-title" class="font-sans font-600 text-5xl lg:text-7xl spacing-2 dark:text-teal-300 text-teal-700">
+			Simplify your link with <b class="dark:text-white text-black">QLM.one</b> 😉
+		</h1>
+	
+		<Shorteaner client:idle />
+		<History client:only />
+	</div>
+</section>

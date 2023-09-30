@@ -1,0 +1,100 @@
+---
+import ToggleTheme from "./Toggle/ToggleTheme.astro";
+import ToggleMenu from "./Toggle/ToggleMenu.astro";
+import { config } from "../config";
+---
+
+<header
+  class="font-mono top-0 z-40 flex-none mx-auto w-full bg-white md:bg-white/90 dark:bg-black/65 md:backdrop-blur-sm"
+  id="header"
+>
+  <div
+    class="py-3 px-3 mx-auto w-full max-w-screen-xl md:flex md:justify-between md:px-4"
+  >
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex-shrink-0">
+        <img
+          src={`${config.baseUrl}icon.webp`}
+          alt="icon"
+          class="aspect-square w-18 h-18"
+          style="width: 72px; height: 72px;"
+        />
+      </a>
+      <div class="flex mr-4 items-right md:hidden">
+        <ToggleTheme />
+        <ToggleMenu />
+      </div>
+    </div>
+
+  
+	<nav
+	class="items-center w-full md:w-auto hidden md:flex text-gray-600 dark:text-slate-200 h-screen md:h-auto"
+	aria-label="Main navigation"
+>
+	<ul
+		class="list-none pl-0 flex flex-col pt-8 md:pt-0 md:flex-row md:self-center w-full md:w-auto text-xl md:text-base"
+	>
+		<li class="dropdownMenu">
+			<details>
+				<summary
+					class="font-medium text-gray-900 dark:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
+				>
+					API Docs 
+				</summary>
+				<div
+					class="absolute mt-2 w-56 rounded-md shadow-lg dark:bg-white bg-black/50 ring-1 ring-black ring-opacity-5"
+				>
+					<div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+						<a
+							href="/Doc#stack"
+							class="block px-4 py-2 text-sm text-white decoration-none dark:text-gray-700 font-medium hover:bg-gray-100 hover:text-gray-900 "
+							role="menuitem">Tech Stack</a
+						>
+						<a
+							href="/Doc#API"
+							class="block px-4 py-2 text-sm text-white decoration-none dark:text-gray-700 font-medium hover:bg-gray-100 hover:text-gray-900 "
+							role="menuitem">Post</a
+						>
+					</div>
+				</div>
+			</details>
+		</li>
+		<li>
+			<a href="https://www.sarbeh.com"
+				class="font-medium text-gray-900 dark:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
+				>About
+			</a>
+		</li>
+
+	</ul>
+	<div class="md:self-center flex items-center mb-4 md:mb-0 ml-2">
+		<div class="items-center md:flex">
+			<ToggleTheme />
+		</div>
+	</div>
+</nav>
+  </div>
+</header>
+
+<script>
+  // Mendapatkan semua elemen dengan hash #API dan #Stack
+  const hashLinks = document.querySelectorAll(
+    'a[href$="#API"], a[href$="#Stack"]'
+  );
+
+  // Mendefinisikan fungsi untuk mengubah kelas elemen
+  const handleHashLinkClick = () => {
+    const elem = document.querySelector("[data-aw-toggle-menu]");
+    if (elem) {
+      elem.classList.remove("expanded");
+    }
+    document.body.classList.remove("overflow-hidden");
+    document.getElementById("header")?.classList.remove("h-screen");
+    document.querySelector("#header nav")?.classList.add("hidden");
+  };
+
+  // Menambahkan event listener untuk setiap elemen hash
+  hashLinks.forEach((link) => {
+    link.addEventListener("click", handleHashLinkClick);
+  });
+</script>
