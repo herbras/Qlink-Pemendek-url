@@ -8,6 +8,8 @@ Simplify your link with QLink Qlm one
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/herbras/Qlink-Pemendek-url)
 
+## Using the Chrome Extension
+[Chrome Extension](https://github.com/herbras/Extension-Qlink)
 
 ## Tech Stack
 
